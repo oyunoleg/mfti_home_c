@@ -18,7 +18,7 @@ E5
 #include <stdio.h>
 
 // Возвращает сумму положительных элементов массива.
-int sum_positive(int *arr, int len)
+int SumPositives(int *arr, int len)
 {
     int sum = 0;
     for (int i = 0; i < len; i++)
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
-    int res = sum_positive(buffer, BUFFER_SIZE);
+    int res = SumPositives(buffer, BUFFER_SIZE);
     printf("%d\n", res);
     return 0;
 }

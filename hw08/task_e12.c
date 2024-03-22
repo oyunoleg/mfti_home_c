@@ -24,8 +24,8 @@ void SwapArr(int *arr, int i, int j)
     arr[j] = temp;
 }
 
-// Выполняет сортировку массива по возрастанию
-void BubbleSort(int *arr, int len)
+// Выполняет сортировку массива по возрастанию либо по убыванию (если descending  >= 1)
+void BubbleSort(int *arr, int len, int descending)
 {
     int noSwap;
     for (int i = len - 1; i >= 0; i--)
@@ -33,27 +33,8 @@ void BubbleSort(int *arr, int len)
         noSwap = 1;
         for (int j = 0; j < i; j++)
         {
-            if (arr[j] > arr[j + 1]) // по убыванию: if (arr[j] < arr[j + 1])
-            {
-                SwapArr(arr, j, j + 1);
-                noSwap = 0;
-            }
-        }
-        if (noSwap)
-            break;
-    }
-}
-
-// Выполняет сортировку массива по убыванию
-void BubbleSortDesc(int *arr, int len)
-{
-    int noSwap;
-    for (int i = len - 1; i >= 0; i--)
-    {
-        noSwap = 1;
-        for (int j = 0; j < i; j++)
-        {
-            if (arr[j] < arr[j + 1])
+            if ((arr[j] > arr[j + 1] && descending <= 0)    // если по возрастанию
+                || (arr[j] < arr[j + 1] && descending > 0)) // либо по убыванию
             {
                 SwapArr(arr, j, j + 1);
                 noSwap = 0;
@@ -69,15 +50,15 @@ int main()
     const int BUFFER_SIZE = 10;
     int buffer[BUFFER_SIZE];
 
-    //printf("Введите %d целых чисел через пробел:\n", BUFFER_SIZE);
+    // printf("Введите %d целых чисел через пробел:\n", BUFFER_SIZE);
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
     // Сортировка первой половины массива по возрастанию (просто половиним размер массива)
-    BubbleSort(buffer, BUFFER_SIZE / 2);
+    BubbleSort(buffer, BUFFER_SIZE / 2, 0);
 
     // Сортировка второй половины массива по убыванию (смешаем указатель на 1й элемент на +5)
-    BubbleSortDesc(buffer + BUFFER_SIZE / 2, BUFFER_SIZE / 2);
+    BubbleSort(buffer + BUFFER_SIZE / 2, BUFFER_SIZE / 2, 1);
 
     for (int i = 0; i < BUFFER_SIZE; i++)
         printf("%d ", buffer[i]);

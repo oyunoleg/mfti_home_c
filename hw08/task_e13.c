@@ -15,13 +15,12 @@ E13 ДЗ 5
 
 // Выполняет добавление чисел в массив out,
 // у которых вторая с конца цифра - ноль,
-int Positives(int in[], int out[], int len)
+int Selection(int in[], int out[], int len)
 {
-    int count = 0, tens;
+    int count = 0;
     for (int i = 0; i < len; i++)
     {
-        tens = (in[i] / 10) % 10;
-        if (tens == 0)
+        if ((in[i] / 10) % 10 == 0)
         {
             out[count] = in[i];
             count++;
@@ -40,7 +39,7 @@ int main()
         scanf("%d", &buffer[i]);
 
     int result[BUFFER_SIZE];
-    int count = Positives(buffer, result, BUFFER_SIZE);
+    int count = Selection(buffer, result, BUFFER_SIZE);
 
     for (int i = 0; i < count; i++)
         printf("%d ", result[i]);

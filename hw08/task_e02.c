@@ -17,7 +17,7 @@ E2
 #include <stdio.h>
 
 // Возвращает минимальное число из элементов массива.
-int sum_positive(int *arr, int len)
+int Min(int *arr, int len)
 {
     int min = arr[0];
     for (int i = 1; i < len; i++)
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
-    int res = sum_positive(buffer, BUFFER_SIZE);
+    int res = Min(buffer, BUFFER_SIZE);
     printf("%d\n", res);
     return 0;
 }

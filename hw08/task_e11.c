@@ -24,7 +24,7 @@ void SwapArr(int *arr, int i, int j)
 }
 
 // Выполняет сортировку массива по последней цифре каждого числа в массиве
-void BubbleSort(int *arr, int len)
+void SortByLastDigit(int *arr, int len)
 {
     int noSwap;
     for (int i = len - 1; i >= 0; i--)
@@ -53,7 +53,7 @@ int main()
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
-    BubbleSort(buffer, BUFFER_SIZE);
+    SortByLastDigit(buffer, BUFFER_SIZE);
 
     for (int i = 0; i < BUFFER_SIZE; i++)
         printf("%d ", buffer[i]);

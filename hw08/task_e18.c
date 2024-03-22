@@ -28,7 +28,7 @@ E18
 */
 #include <stdio.h>
 
-void printResult(int max_number)
+void PrintResult(int max_number)
 {
     /* Массив (8 элементов), который хранит количество чисел:
      - первый элемент - количество чисел кратных 2,
@@ -62,7 +62,7 @@ int main(void)
 
     if (n >= 2 && n <= 10000)
     {
-        printResult(n);
+        PrintResult(n);
         return 0;
     }
     else

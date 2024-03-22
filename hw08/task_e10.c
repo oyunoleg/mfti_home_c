@@ -18,14 +18,13 @@ E10 ДЗ 3
 #include <stdio.h>
 
 // Выполняет циклический сдвиг массива вправо на 4 элемента.
-void ShiftRight(int *arr, int len)
+void ShiftRight(int *arr, int len, int count)
 {
-    const int COUNT = 4;
-    int temp[COUNT];
+    int temp[count];
 
-    // Скопируем последних 4 элемента
+    // Скопируем последних COUNT элемента
     int j = 0;
-    for (int i = (len - COUNT); i < len; i++)
+    for (int i = (len - count); i < len; i++)
     {
         temp[j] = arr[i];
         j++;
@@ -34,7 +33,7 @@ void ShiftRight(int *arr, int len)
     // Переместим первые 6 элементов  вправо,  после чего
     // заполнм первые 4 элемента из временного массива
     for (int i = len - 1; i >= 0; i--)
-        arr[i] = (i >= COUNT) ? arr[i - COUNT] : temp[i];
+        arr[i] = (i >= count) ? arr[i - count] : temp[i];
 }
 
 int main(int argc, char **argv)
@@ -45,7 +44,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
-    ShiftRight(buffer, BUFFER_SIZE);
+    ShiftRight(buffer, BUFFER_SIZE, 4);
 
     for (int i = 0; i < BUFFER_SIZE; i++)
         printf("%d ", buffer[i]);

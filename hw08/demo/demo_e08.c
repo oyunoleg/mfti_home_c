@@ -22,7 +22,7 @@ void aPrint(int *arr, int len)
         printf("%d ", arr[i]);
 }
 
-void reverseArray(int *array, int num)
+void Reverse(int *array, int num)
 {
     for (int i = 0, j = num - 1; i < j; i++, j--)
     {
@@ -42,7 +42,7 @@ int main()
     for (int i = 0; i < aSize; i++)
         scanf("%d", &array[i]);
     for (int i = 0; i < 3; i++)
-        reverseArray(array + i * aSize / 3, aSize / 3);
+        Reverse(array + i * aSize / 3, aSize / 3);
 
     aPrint(array, aSize);
     return 0;

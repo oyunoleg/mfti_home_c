@@ -13,7 +13,7 @@ E19 ДЗ *
 */
 #include <stdio.h>
 
-void printLikeMax(int n)
+void PrintDigits(int n)
 {
     int len = 0, index = 0, temp = n;
 
@@ -45,7 +45,7 @@ int main()
     //printf("Введите одно целое число:\n");
     scanf("%d", &n);
 
-    printLikeMax(n);
+    PrintDigits(n);
     printf("\n");
 
     return 0;

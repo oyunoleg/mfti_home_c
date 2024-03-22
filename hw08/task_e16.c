@@ -14,7 +14,7 @@ E16 Д3 6
 #include <stdio.h>
 
 // Возвращает число в массиве встречается чаще других.
-int mostFrequent(int arr[], int len)
+int MostFrequent(int arr[], int len)
 {
     int maxCount = 0;     // Максимальное количество вхождений
     int mostFrequent = 1; // Наиболее часто встречающееся число
@@ -49,7 +49,7 @@ int main()
     for (int i = 0; i < BUFFER_SIZE; i++)
         scanf("%d", &buffer[i]);
 
-    int count = mostFrequent(buffer, BUFFER_SIZE);
+    int count = MostFrequent(buffer, BUFFER_SIZE);
     printf("%d\n", count);
 
     return 0;

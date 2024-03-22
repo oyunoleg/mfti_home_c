@@ -18,13 +18,7 @@ E7 Практик 2
 */
 #include <stdio.h>
 
-void aPrint(int *arr, int len)
-{
-    for (int i = 0; i < len; i++)
-        printf("%d ", arr[i]);
-}
-
-void reverseArray(int *arr, int len)
+void Reverse(int *arr, int len)
 {
     for (int i = 0, j = len - 1; i < j; i++, j--)
     {
@@ -43,7 +37,7 @@ int main()
         scanf("%d", &buffer[i]);
 
     for (int i = 0; i < 2; i++)
-        reverseArray(buffer + i * BUFFER_SIZE / 2, BUFFER_SIZE / 2);
+        Reverse(buffer + i * BUFFER_SIZE / 2, BUFFER_SIZE / 2);
 
     for (int i = 0; i < BUFFER_SIZE; i++)
         printf("%d ", buffer[i]);
