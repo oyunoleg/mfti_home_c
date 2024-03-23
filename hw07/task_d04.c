@@ -21,25 +21,23 @@ void print_num(int num)
 */
 #include <stdio.h>
 
-void print_num(int num)
+void PrintDigits(int num)
 {
     if (num < 10)
     {
         printf("%d ", num);
         return;
     }
-    print_num(num / 10);
+    PrintDigits(num / 10);
     printf("%d ", num % 10);
 }
 
 int main(void)
 {
     int n;
-    printf("Введите 1 произвольное целое число N:\n");
     scanf("%d", &n);
 
-    printf("В прямом порядке:\n");
-    print_num(n);
+    PrintDigits(n);
     printf("\n");
     
     return 0;

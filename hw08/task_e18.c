@@ -30,17 +30,10 @@ E18
 
 void PrintResult(int max_number)
 {
-    /* Массив (8 элементов), который хранит количество чисел:
-     - первый элемент - количество чисел кратных 2,
-     - и т.д:  2-7 элемент - количество чисел кратных 3-8,
-     - последний восьмой - количество чисел кратных 9 */
     int result[8] = {0};
 
-    // Перебираем подряд все числа от 2 до N
     for (int number = 2; number <= max_number; number++)
     {
-        // Перебираем числа от 2 до 9 для текущего number для определения кратных.
-        // res_index - позиция в массиве result, т.к. 'j' начинается с 2.
         for (int j = 2, r_index = 0; j <= 9; j++, r_index++)
         {
             // Если число i кратно числу j, увеличиваем соотв. элемент в массиве result
@@ -49,7 +42,6 @@ void PrintResult(int max_number)
         }
     }
 
-    // Выводим из массива все 8 пар чисел с учетом смещения на i+2,
     for (int i = 0, number = 2; i < 8; i++, number++)
         printf("%d %d\n", number, result[i]);
 }
@@ -71,3 +63,23 @@ int main(void)
         return 1;
     }
 }
+
+/****
+Самый классный вариант решения от Ивана:
+
+int main(void)
+{
+    int n;
+    int arr[8];
+    scanf("%d", &n);
+
+    for (int number = 2, i = 0; number <= 9; number++, i++)
+        arr[i] = n / number;
+
+    or (int i = 0; i < 8; i++)
+        printf("%d %d\n", i + 2, arr[i]);
+    printf("\n");
+
+    return 0;
+}
+*/

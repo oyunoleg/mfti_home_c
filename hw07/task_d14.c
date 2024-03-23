@@ -15,7 +15,7 @@ D14 ДЗ 4
 #include <stdio.h>
 
 // Рекурсивная функция для вывода всех нечетных чисел из последовательности
-void print_odds()
+void PrintOdds()
 {
     int num;
     scanf("%d", &num);
@@ -26,12 +26,12 @@ void print_odds()
     if (num % 2 != 0)
         printf("%d ", num);
 
-    print_odds();
+    PrintOdds();
 }
 
 int main()
 {
-    printf("Введите ненулевые числа (в конце введите 0):\n");
-    print_odds();
+    //printf("Введите ненулевые числа (в конце введите 0):\n");
+    PrintOdds();
     return 0;
 }

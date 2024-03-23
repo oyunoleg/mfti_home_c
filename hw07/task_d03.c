@@ -18,7 +18,7 @@ D3 Практик 1
 */
 #include <stdio.h>
 
-void print_reverse_num(int num)
+void PrintReversed(int num)
 {
     if (num < 10)
     {
@@ -26,17 +26,15 @@ void print_reverse_num(int num)
         return;
     }
     printf("%d ", num % 10);
-    print_reverse_num(num / 10);
+    PrintReversed(num / 10);
 }
 
 int main(void)
 {
     int n;
-    printf("Введите 1 произвольное целое число N:\n");
     scanf("%d", &n);
 
-    printf("В обратном порядке:\n");
-    print_reverse_num(n);
+    PrintReversed(n);
     printf("\n");
 
     return 0;

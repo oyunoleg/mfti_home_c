@@ -17,23 +17,22 @@ E10 ДЗ 3
 */
 #include <stdio.h>
 
-// Выполняет циклический сдвиг массива вправо на 4 элемента.
-void ShiftRight(int *arr, int len, int count)
+// Выполняет циклический сдвиг массива вправо на N.
+void ShiftRight(int *arr, int len, int n)
 {
-    int temp[count];
+    int temp[n];
 
-    // Скопируем последних COUNT элемента
-    int j = 0;
-    for (int i = (len - count); i < len; i++)
-    {
+    // Скопируем N последних  элемента 
+    for (int i = (len - n), j = 0; i < len; i++, j++)
         temp[j] = arr[i];
-        j++;
-    }
     
-    // Переместим первые 6 элементов  вправо,  после чего
-    // заполнм первые 4 элемента из временного массива
+    // Переместим вправо 
     for (int i = len - 1; i >= 0; i--)
-        arr[i] = (i >= count) ? arr[i - count] : temp[i];
+        arr[i] = arr[i - n];    
+
+    // заполнм первые N элементов из временного массива
+    for (int i = 0; i < n; i++)
+        arr[i] = temp[i];    
 }
 
 int main(int argc, char **argv)

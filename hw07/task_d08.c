@@ -18,7 +18,7 @@ D8 ДЗ 2
 */
 #include <stdio.h>
 
-void print_numbers(int a, int b)
+void PrintDigits(int a, int b)
 {
     if (a == b)
     {
@@ -28,19 +28,18 @@ void print_numbers(int a, int b)
   
     printf("%d ", a);
     if (a < b)
-        print_numbers(a + 1, b);
+        PrintDigits(a + 1, b);
     else
-        print_numbers(a - 1, b);
+        PrintDigits(a - 1, b);
 }
 
 int main()
 {
     int a, b;
-    printf("Введите 2 целых числа через пробел: ");
+    //printf("Введите 2 целых числа через пробел: ");
     scanf("%d%d", &a, &b);
 
-    printf("Все числа от %d до %d:\n", a, b);
-    print_numbers(a, b);
+    PrintDigits(a, b);
 
     return 0;
 }

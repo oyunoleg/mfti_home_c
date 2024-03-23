@@ -16,20 +16,20 @@ D11 ДЗ 3
 */
 #include <stdio.h>
 
-int count(int n)
+int СountOnes(int n)
 {
     if (n == 0)
         return 0;
-    return (n % 2) + count(n / 2);
+    return (n % 2) + СountOnes(n / 2);
 }
 
 int main(void)
 {
     int n;
-    printf("Введите 1 произвольное целое число N:\n");
+    //printf("Введите 1 произвольное целое число N:\n");
     scanf("%d", &n);
 
-    printf("Количество единиц: %d\n", count(n));
+    printf("%d\n", СountOnes(n));
 
     return 0;
 }
