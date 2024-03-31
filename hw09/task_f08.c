@@ -26,33 +26,33 @@ N не превосходит 1000. Последовательность зак�
 int findMissedNumber(int size, int a[])
 {
     int min = a[0], max = a[0];
-    int totalSum = 0;
+    int totalSum = a[0];
 
-    for (int i = 0; i < size; ++i)
+    for (int i = 1; i < size; ++i)
     {
         if (a[i] <= 0)
-            continue;
+            continue; // только > 0
 
-        totalSum += a[i];
+        totalSum += a[i]; // общая сумма
 
         if (a[i] < min)
-            min = a[i];
+            min = a[i]; // минимум
         if (a[i] > max)
-            max = a[i];
+            max = a[i]; // максимум
     }
 
     int expectedSum = (min + max) * (max - min + 1) / 2;
-    return expectedSum - totalSum;
+    return expectedSum - totalSum; // пропущенное число
 }
 
 int main(void)
 {
-    int arr[SIZE] = {0};
+    int arr[MAX_SIZE] = {0}; 
 
-    int len = 0, num;
-    while (scanf("%d", &num) == 1 && num != 0 && len < SIZE)
+    int len = 0;
+    while (len < MAX_SIZE && scanf("%d", &arr[len]) == 1 && arr[len] != 0)
     {
-        arr[len++] = num;
+        len++;
     }
 
     int missed = findMissedNumber(len, arr);
