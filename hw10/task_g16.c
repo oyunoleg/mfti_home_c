@@ -26,17 +26,17 @@ void input(char *strIn)
     in = fopen(INPUT_FILE, "r");
 
     while (fscanf(in, "%[^\n]", strIn) == 1)
-         ;
-    
+        ;
+
     fclose(in);
 }
 
-void changeName(char in[], char out[])
+void change_name(char in[], char out[])
 {
     // Зачищаем буфер, поскольку далее есть его чтение
     for (int i = 0; i < MAX_LENGTH; ++i)
         out[i] = 0;
-    
+
     int count = 0;
     for (int i = 0; i < strlen(in) && in[i] != '\0'; i++)
     {
@@ -47,7 +47,7 @@ void changeName(char in[], char out[])
             i += 4;
         }
         out[count++] = in[i];
-    }    
+    }
 }
 
 void output(char *strOut)
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 {
     char str[MAX_LENGTH] = {0}, strFinal[MAX_LENGTH] = {0};
     input(str);
-    changeName(str, strFinal);
+    change_name(str, strFinal);
     output(strFinal);
     return 0;
 }
