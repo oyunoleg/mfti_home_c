@@ -25,8 +25,20 @@ const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 #define MAX_LENGTH 101
 
+FILE *try_open_file(const char filename[], const char mode[])
+{
+    FILE *fp = fopen(filename, mode);
+    if (fp == NULL)
+    {
+        char message[1001];
+        snprintf(message, sizeof(message), "Error opening file '%s' mode '%s'", filename, mode);
+        perror(message);
+    }
+    return fp;
+}
+
 // Сортирует строку.
-void sortString(char str[])
+void sort_str(char str[])
 {
     char temp;
     int size = strlen(str);
@@ -45,7 +57,7 @@ void sortString(char str[])
 }
 
 // Возвращает 1 если символ уже есть в массиве иначе 0.
-int isExists(int size, char arr[], char c)
+int is_exists(int size, char arr[], char c)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -94,13 +106,13 @@ void process(char in[], char out[])
         }
 
         // Если символ один в каждом слове то добавляем его в результат, если его еще там нет
-        if (count1 == 1 && count2 == 1 && isExists(out_len, out, in[i]) != 1)
+        if (count1 == 1 && count2 == 1 && is_exists(out_len, out, in[i]) != 1)
             out[out_len++] = in[i];
     }
     out[out_len] = '\0'; // теперь это строка
 
     // Сортируем строку
-    sortString(out);
+    sort_str(out);
 }
 
 int main(void)
@@ -109,11 +121,8 @@ int main(void)
     char line[MAX_LENGTH * 2] = {0}, result[MAX_LENGTH] = {0};
 
     // Чтение строки из входного файла в line массив
-    if ((fp = fopen(INPUT_FILE, "r")) == NULL)
-    {
-        perror("Error occured while opening input file!");
+    if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-    }
     fscanf(fp, "%[^\n]", line);
     fclose(fp);
 
@@ -121,11 +130,9 @@ int main(void)
     process(line, result);
 
     // Запись result в выходной файл
-    if ((fp = fopen(OUTPUT_FILE, "w")) == NULL)
-    {
-        perror("Error occured while opening output file!");
+    if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
-    }
+    
     for (int i = 0; i < strlen(result); ++i)
         fprintf(fp, "%c ", result[i]);
     fclose(fp);
