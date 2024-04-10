@@ -19,23 +19,21 @@ G10
 const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 
-int main(void)
+FILE *try_open_file(const char filename[], const char mode[])
 {
-    FILE *fp;
-    char str[MAX_LENGTH] = {0};
-    char uniques[MAX_LENGTH] = {0};
-    int count = 0;
-
-    // Чтение строки из входного файла в массив
-    if ((fp = fopen(INPUT_FILE, "r")) == NULL)
+    FILE *fp = fopen(filename, mode);
+    if (fp == NULL)
     {
-        perror("Error occured while opening input file!");
-        return 1;
+        char message[1001];
+        snprintf(message, sizeof(message), "Error opening file '%s' mode '%s'", filename, mode);
+        perror(message);
     }
-    fscanf(fp, "%[^\n]", str);
-    fclose(fp);
+    return fp;
+}
 
-    // Поиск самого длинного слова
+// Поиск самого длинного слова
+void search_longest(char str[], char out[])
+{
     char longest_word[MAX_LENGTH] = {0};
     int longest_len = 0;
     char *word = strtok(str, " ");
@@ -44,19 +42,32 @@ int main(void)
         int length = strlen(word);
         if (length > longest_len)
         {
-            // Копируем все символы слова в longest_word
             strcpy(longest_word, word);
             longest_len = length;
         }
         word = strtok(NULL, " ");
     }
+    strcpy(out, longest_word);
+}
 
-    // Запись в выходной файл
-    if ((fp = fopen(OUTPUT_FILE, "w")) == NULL)
-    {
-        perror("Error occured while opening output file!");
+int main(void)
+{
+    FILE *fp;
+    char str[MAX_LENGTH] = {0};
+    char uniques[MAX_LENGTH] = {0};
+    int count = 0;
+
+    if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-    }
+    fscanf(fp, "%[^\n]", str);
+    fclose(fp);
+
+    // Поиск самого длинного слова
+    char longest_word[MAX_LENGTH] = {0};
+    search_longest(str, longest_word);
+
+    if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
+        return 1;
     fprintf(fp, "%s", longest_word);
     fclose(fp);
 
