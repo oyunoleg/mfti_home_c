@@ -81,7 +81,7 @@ int output(char out[])
 }
 
 // Возвращает Soundex-код символа.
-int getSoundexCode(char symbol)
+int soundex_code(char symbol)
 {
     switch (tolower(symbol))
     {
@@ -115,7 +115,7 @@ int getSoundexCode(char symbol)
 }
 
 // Приводит строку к формату Soundex - 4 символа.
-void normalizeSoundex(char str[])
+void normalize_soundex(char str[])
 {
     int index = 0;
     while (index < strlen(str) - 1)
@@ -148,7 +148,7 @@ void normalizeSoundex(char str[])
 }
 
 // Преобразование строки по алгоритму Soundex.
-void Soundex(char str[], char out[])
+void soundex(const char str[], char out[])
 {
     // Получаем индекс самого первого символа
     int startPos = -1;
@@ -172,12 +172,12 @@ void Soundex(char str[], char out[])
     // Добавляем числовые коды остальных символов (только согласные)
     for (int i = startPos + 1; i < strlen(str); ++i)
     {
-        int code = getSoundexCode(str[i]);
+        int code = soundex_code(str[i]);
         if (code != 0)
             out[count++] = code + '0';
     }
     out[count] = '\0';
-    normalizeSoundex(out);    
+    normalize_soundex(out);
 }
 
 int main(void)
@@ -185,7 +185,7 @@ int main(void)
     char str[MAX_LENGTH] = {0};
     char result[MAX_LENGTH] = {0};
     input(str);
-    Soundex(str, result);
+    soundex(str, result);
     output(result);
 
     return 0;
