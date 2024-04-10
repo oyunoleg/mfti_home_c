@@ -1,7 +1,7 @@
 /*
 G3 Практ 1
 Последний номер символа
-В файле .txt дана строка из 1000 символов. 
+В файле .txt дана строка из 1000 символов.
 Показать номера символов, совпадающих
 с последним символом строки. Результат записать в файл .txt
 
@@ -20,47 +20,50 @@ G3 Практ 1
 const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 
+FILE *try_open_file(const char filename[], const char mode[])
+{
+    FILE *fp = fopen(filename, mode);
+    if (fp == NULL)
+    {
+        char message[1001];
+        snprintf(message, sizeof(message), "Error opening file '%s' mode '%s'", filename, mode);
+        perror(message);
+    }
+    return fp;
+}
+
 int main(void)
 {
 
-    FILE *f_in, *f_out;
+    FILE *fp;
     char line[LINE_WIDTH] = {0};
     char c, last_char;
     int count = 0;
 
     // Открытие входного файла для чтения
-    if ((f_in = fopen(INPUT_FILE, "r")) == NULL)
-    {
-        perror("Error occured while opening input file!");
-        fprintf(stderr, "Failed to open file: '%s'.\n", INPUT_FILE);
+    if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-    }
 
     // Чтение первой строки из входного файла
-    while (((c = getc(f_in)) != EOF) && (c != '\n'))
+    while (((c = getc(fp)) != EOF) && (c != '\n'))
     {
         line[count++] = c;
         last_char = c;
     }
     line[count] = '\0';
-    fclose(f_in);
+    fclose(fp);
 
     // Открытие выходного файла для записи
-    if ((f_out = fopen(OUTPUT_FILE, "w")) == NULL)
-    {
-        perror("Error occured while opening output file!");
-        fprintf(stderr, "Failed to open file: '%s'.\n", OUTPUT_FILE);
+    if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
-    }
 
     // Запись в выходной файл
     for (int i = 0; i < count - 1; ++i)
     {
         if (line[i] == last_char)
-            fprintf(f_out, "%d ", i);
+            fprintf(fp, "%d ", i);
     }
-    fclose(f_out);
+    fclose(fp);
 
     return 0;
 }
-
