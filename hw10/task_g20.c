@@ -45,7 +45,7 @@ int input(char in[])
     return 0;
 }
 
-void removeSpaces(char *str)
+void remove_spaces(char *str)
 {
     int count = 0;
     for (int i = 0; i < strlen(str); i++)
@@ -56,7 +56,7 @@ void removeSpaces(char *str)
     str[count] = '\0';
 }
 
-void bubbleSort(int size, char *array)
+void bubble_sort(int size, char *array)
 {
     char buf;
     for (int i = 0; i < size - 1; i++)
@@ -72,13 +72,13 @@ void bubbleSort(int size, char *array)
 int is_palindrom(char line[])
 {
     // printf("%s\n", line);
-    removeSpaces(line);
+    remove_spaces(line);
     const int size = strlen(line);
     char letters[size][2];
     int letters_count = 0;
     int idx = 0;
 
-    bubbleSort(size, line);
+    bubble_sort(size, line);
 
     for (int i = 0; i < size; i++)
     {
