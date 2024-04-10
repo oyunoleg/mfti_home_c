@@ -18,7 +18,6 @@ G12
 const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 
-
 FILE *try_open_file(const char filename[], const char mode[])
 {
     FILE *fp = fopen(filename, mode);
@@ -31,8 +30,6 @@ FILE *try_open_file(const char filename[], const char mode[])
     return fp;
 }
 
-
-
 int main(void)
 {
     FILE *fp;
@@ -40,12 +37,13 @@ int main(void)
 
     if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-    fscanf(fp, "%[^\n]", str);
+
+    fgets(str, MAX_LENGTH, fp);
     fclose(fp);
 
     if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
-    
+
     char *word = strtok(str, " ");
     while (word != NULL)
     {
@@ -53,6 +51,5 @@ int main(void)
         word = strtok(NULL, " ");
     }
     fclose(fp);
-
     return 0;
 }
