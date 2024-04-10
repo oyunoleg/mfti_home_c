@@ -5,7 +5,7 @@ G18
 Для решения задачи разработать функцию.
 Результат записать в .txt.
 
-Данные на входе: 	Строка из английских букв, знаков препинания и пробелов. 
+Данные на входе: 	Строка из английских букв, знаков препинания и пробелов.
 Не более 1000 символов.
 Данные на выходе: 	Строка из английских букв, знаков препинания и пробелов.
 
@@ -52,7 +52,7 @@ int output(char out[])
 }
 
 // Сдвигает все элементы на одну позицию влево, удаляя пробел
-void removeLeadingSpace(char str[], int spacePosition)
+void remove_spaces(char str[], int spacePosition)
 {
     if (str[spacePosition] != ' ')
         return;
@@ -67,7 +67,7 @@ void removeLeadingSpace(char str[], int spacePosition)
 }
 
 // Убирает лишние пробелы.
-void shrinkSpaces(char str[])
+void shrink_spaces(char str[])
 {
     char space_char = ' ';
     int index = 0, len = strlen(str);
@@ -78,10 +78,9 @@ void shrinkSpaces(char str[])
             if (str[index + 1] == space_char || index == 0)
             {
                 // Удаляем двойные и лидирующие пробелы
-                removeLeadingSpace(str, index);
+                remove_spaces(str, index);
                 index--;
             }
-           
         }
         index++;
     }
@@ -91,7 +90,7 @@ int main(void)
 {
     char str[MAX_SIZE] = {0};
     input(str);
-    shrinkSpaces(str);
+    shrink_spaces(str);
     output(str);
 
     return 0;
