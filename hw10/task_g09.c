@@ -32,14 +32,30 @@ FILE *try_open_file(const char filename[], const char mode[])
     return fp;
 }
 
-int is_exists(int size, char arr[], char c)
+// Только уникальные без пробела
+void get_uniques(const char in[], char out[])
 {
-    for (int i = 0; i < size; ++i)
+    int count = 0;
+    for (int i = 0; i < strlen(in) && in[i] != '\0'; ++i)
     {
-        if (arr[i] == c)
-            return 1;
+        if (in[i] == ' ')
+            continue;
+
+        // Есть ли уже символ в массиве out
+        int exists = 0;
+        for (int j = 0; j < count; ++j)
+        {
+            if (in[i] == out[j])
+            {
+                exists = 1;
+                break;
+            }
+        }
+
+        if (!exists)
+            out[count++] = in[i];
     }
-    return 0;
+    out[count] = '\0';
 }
 
 int main(void)
@@ -47,27 +63,14 @@ int main(void)
     FILE *fp;
     char str[MAX_LENGTH] = {0};
     char uniques[MAX_LENGTH] = {0};
-    int count = 0;
 
-    // Чтение строки из входного файла в массив
     if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
     fscanf(fp, "%[^\n]", str);
     fclose(fp);
 
-    // Только уникальные без пробела
-    count = 0;
-    for (int i = 0; str[i] != '\0' && i < MAX_LENGTH; ++i)
-    {
-        if (str[i] == ' ')
-            continue;
+    get_uniques(str, uniques);
 
-        if (!is_exists(count, uniques, str[i]))
-            uniques[count++] = str[i];
-    }
-    uniques[count] = '\0';
-
-    // Запись в выходной файл
     if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
     fprintf(fp, "%s", uniques);
