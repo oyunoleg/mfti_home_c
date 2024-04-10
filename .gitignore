@@ -1,5 +1,7 @@
 .vscode/
 todo/
+*/input.txt
+*/output.txt
 
 # Prerequisites
 *.d

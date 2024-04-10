@@ -19,7 +19,19 @@ G5 ДЗ 2
 const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 
-void replaceChars(char str[])
+FILE *try_open_file(const char filename[], const char mode[])
+{
+    FILE *fp = fopen(filename, mode);
+    if (fp == NULL)
+    {
+        char message[1001];
+        snprintf(message, sizeof(message), "Error opening file '%s' mode '%s'", filename, mode);
+        perror(message);
+    }
+    return fp;
+}
+
+void replace_chars(char str[])
 {
     while (*str != '\0')
     {
@@ -48,24 +60,17 @@ int main(void)
     FILE *fp;
     char str[MAX_LENGTH * 2] = {0}, result[MAX_LENGTH] = {0};
 
-    // Чтение строки из входного файла в line массив
-    if ((fp = fopen(INPUT_FILE, "r")) == NULL)
-    {
-        perror("Error occured while opening input file!");
+    if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-    }
+
     fscanf(fp, "%[^\n]", str);
     fclose(fp);
 
     // Замена символов
-    replaceChars(str);
+    replace_chars(str);
 
-    // Запись result в выходной файл
-    if ((fp = fopen(OUTPUT_FILE, "w")) == NULL)
-    {
-        perror("Error occured while opening output file!");
+    if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
-    }
     fprintf(fp, "%s", str);
     fclose(fp);
 
