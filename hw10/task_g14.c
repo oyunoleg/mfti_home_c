@@ -18,28 +18,20 @@ Hello name
 const char *INPUT_FILE = "input.txt";
 const char *OUTPUT_FILE = "output.txt";
 
-int main(void)
+FILE *try_open_file(const char filename[], const char mode[])
 {
-    FILE *fp;
-    char str[MAX_LENGTH] = {0};
-
-    // Чтение строки из входного файла в массив
-    if ((fp = fopen(INPUT_FILE, "r")) == NULL)
+    FILE *fp = fopen(filename, mode);
+    if (fp == NULL)
     {
-        perror("Error occured while opening input file!");
-        return 1;
+        char message[1001];
+        snprintf(message, sizeof(message), "Error opening file '%s' mode '%s'", filename, mode);
+        perror(message);
     }
-    fscanf(fp, "%[^\n]", str);
-    fclose(fp);
+    return fp;
+}
 
-    // Запись в выходной файл
-    if ((fp = fopen(OUTPUT_FILE, "w")) == NULL)
-    {
-        perror("Error occured while opening output file!");
-        return 1;
-    }
-
-    char surname[MAX_LENGTH] = {0}, name[MAX_LENGTH] = {0};
+void parse_name(char str[], char surname[], char name[])
+{
     int count = 0;
     char *word = strtok(str, " ");
     while (count < 2)
@@ -53,6 +45,24 @@ int main(void)
         count++;
         word = strtok(NULL, " ");
     }
+}
+
+int main(void)
+{
+    FILE *fp;
+    char str[MAX_LENGTH] = {0};
+
+    if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
+        return 1;
+    fscanf(fp, "%[^\n]", str);
+    fclose(fp);
+
+    if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
+        return 1;
+
+    char surname[MAX_LENGTH] = {0}, name[MAX_LENGTH] = {0};
+    parse_name(str, surname, name);
+
     fprintf(fp, "Hello, %s %s!", name, surname);
     fclose(fp);
 
