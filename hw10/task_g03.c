@@ -15,6 +15,7 @@ G3 Практ 1
 */
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #define LINE_WIDTH 1001
 const char *INPUT_FILE = "input.txt";
@@ -37,30 +38,24 @@ int main(void)
 
     FILE *fp;
     char line[LINE_WIDTH] = {0};
-    char c, last_char;
-    int count = 0;
 
-    // Открытие входного файла для чтения
     if ((fp = try_open_file(INPUT_FILE, "r")) == NULL)
         return 1;
-
-    // Чтение первой строки из входного файла
-    while (((c = getc(fp)) != EOF) && (c != '\n'))
-    {
-        line[count++] = c;
-        last_char = c;
-    }
-    line[count] = '\0';
+    fscanf(fp, "%[^\n]", line);
     fclose(fp);
 
-    // Открытие выходного файла для записи
     if ((fp = try_open_file(OUTPUT_FILE, "w")) == NULL)
         return 1;
 
-    // Запись в выходной файл
-    for (int i = 0; i < count - 1; ++i)
+    // Последний alphanum символ
+    int last_char_idx = strlen(line) - 1;
+    while (last_char_idx >= 0 && !isalnum(line[last_char_idx]))
+        last_char_idx--;
+
+    // Запись индксов таких же символов в файл
+    for (int i = 0; i < last_char_idx; ++i)
     {
-        if (line[i] == last_char)
+        if (line[i] == line[last_char_idx])
             fprintf(fp, "%d ", i);
     }
     fclose(fp);
