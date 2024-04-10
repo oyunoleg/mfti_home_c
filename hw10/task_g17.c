@@ -55,7 +55,7 @@ int output(char out[])
 }
 
 // Меняет местами два соседних символа.
-void shrinkSpaces(char str[])
+void shrink_spaces(char str[])
 {
     int len = strlen(str);
     char space_char = ' ', temp;
@@ -86,7 +86,7 @@ int main(void)
 {
     char str[MAX_SIZE] = {0};
     input(str);
-    shrinkSpaces(str);
+    shrink_spaces(str);
     output(str);
 
     return 0;
