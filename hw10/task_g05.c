@@ -33,25 +33,16 @@ FILE *try_open_file(const char filename[], const char mode[])
 
 void replace_chars(char str[])
 {
-    while (*str != '\0')
+    for (int i = 0; i < strlen(str) && str[i] != '\0'; i++)
     {
-        if (*str == 'a')
+        if (str[i] == 'a' || str[i] == 'b')
         {
-            *str = 'b';
+            str[i] = (str[i] == 'a') ? 'b' : 'a';
         }
-        else if (*str == 'A')
+        else if (str[i] == 'A' || str[i] == 'B')
         {
-            *str = 'B';
+            str[i] = (str[i] == 'A') ? 'B' : 'A';
         }
-        else if (*str == 'b')
-        {
-            *str = 'a';
-        }
-        else if (*str == 'B')
-        {
-            *str = 'A';
-        }
-        str++;
     }
 }
 
