@@ -128,7 +128,7 @@ int8_t avg_monthly_temperature(int size, Sensor sensors[], uint16_t year, uint8_
 
 int8_t min_monthly_temperature(int size, Sensor sensors[], uint16_t year, uint8_t month)
 {
-    int8_t min = 0;
+    int8_t min = 99;
     for (int i = 0; i < size; ++i)
     {
         if (sensors[i].year == year || year == 0)
@@ -146,7 +146,7 @@ int8_t min_monthly_temperature(int size, Sensor sensors[], uint16_t year, uint8_
 
 int8_t max_monthly_temperature(int size, Sensor sensors[], uint16_t year, uint8_t month)
 {
-    int8_t max = 0;
+    int8_t max = -99;
     for (int i = 0; i < size; ++i)
     {
         if (sensors[i].year == year || year == 0)
@@ -178,7 +178,7 @@ int8_t avg_yearly_temperature(int size, Sensor sensors[], uint16_t year)
 
 int8_t min_yearly_temperature(int size, Sensor sensors[], uint16_t year)
 {
-    int8_t min = 0;
+    int8_t min = 99;
     for (int i = 0; i < size; ++i)
     {
         if (sensors[i].year == year || year == 0)
@@ -192,7 +192,7 @@ int8_t min_yearly_temperature(int size, Sensor sensors[], uint16_t year)
 
 int8_t max_yearly_temperature(int size, Sensor sensors[], uint16_t year)
 {
-    int8_t max = 0;
+    int8_t max = -99;
     for (int i = 0; i < size; ++i)
     {
         if (sensors[i].year == year || year == 0)
